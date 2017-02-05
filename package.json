@@ -1,5 +1,5 @@
 {
-  "name": "@seage/ng-common",
+  "name": "@seage/ng-bases",
   "version": "1.0.0",
   "description": "ng common lib",
   "main": "bundles/index.js",
