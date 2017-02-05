@@ -1,0 +1,24 @@
+{
+  "name": "@seage/ng-common",
+  "version": "1.0.0",
+  "description": "ng common lib",
+  "main": "bundles/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "ng"
+  ],
+  "author": {
+    "name": "sean",
+    "email": "sean@seage.net"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/angular": "^1.6.3",
+    "@types/node": "^7.0.4"
+  },
+  "dependencies": {
+    "angular": "^1.6.1"
+  }
+}
