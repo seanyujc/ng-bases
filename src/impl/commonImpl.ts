@@ -6,17 +6,20 @@ import {IApiConfigProvider, IServerConfigProvider, Site, Host} from "../provider
 import {ICommon} from "../common";
 import {Env} from "../enums";
 
-
 class CommonFactory implements ICommon {
     static $inject = ["$q", "apiConfig", "serverConfig"];
     private env: Env;
     private curSite: Site;
     private domain: string;
+    private localSite: string;
+    private entrance: string;
 
     constructor(private $q: ng.IQService, private apiConfig: IApiConfigProvider, private serverConfig: IServerConfigProvider) {
         this.env = serverConfig.env;
         this.curSite = serverConfig.sites[this.env];
         this.domain = this.curSite.remote;
+        this.localSite = '//' + this.curSite.local + serverConfig.publicPath;
+        this.entrance = '//' + this.curSite.remote;
     }
 
     trim(s: string): string {
@@ -44,6 +47,14 @@ class CommonFactory implements ICommon {
         return _url;
     }
 
+    getLocalSite():string{
+        return this.localSite;
+    }
+
+    getEntrance(): string{
+
+    }
+
     q(url: string): any {
         var _search = "", q = {}, _q;
         if (url === undefined) {
@@ -65,7 +76,7 @@ class CommonFactory implements ICommon {
 
 export const common: IAddMemberFn = function (module: IModule) {
 
-    module.factory('sgCommon', CommonFactory);
+    module.service('sgCommon', CommonFactory);
 
     return module;
 };
