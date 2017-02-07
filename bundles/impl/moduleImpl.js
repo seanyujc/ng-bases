@@ -1,5 +1,5 @@
 "use strict";
-var angular_1 = require('angular');
-var ngSgCommon = angular_1.module('ng-sg-common', []);
+var angular = require("angular");
+var ngSgCommon = angular.module('ng-sg-common', []);
 exports.ngSgCommon = ngSgCommon;
 //# sourceMappingURL=moduleImpl.js.map

@@ -1,13 +1,13 @@
 {
-  "name": "@seage/ng-bases",
-  "version": "1.0.0",
+  "name": "ng-bases",
+  "version": "1.0.4",
   "description": "ng common lib",
   "main": "bundles/index.js",
   "scripts": {
     "test": "test"
   },
   "keywords": [
-    "ng"
+    "ng base"
   ],
   "author": {
     "name": "sean",

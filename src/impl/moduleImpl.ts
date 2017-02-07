@@ -1,5 +1,5 @@
-import {module} from 'angular';
+import * as angular from "angular";
 
-const ngSgCommon = module('ng-sg-common',[]);
+const ngSgCommon: angular.IModule = angular.module('ng-sg-common', []);
 
 export {ngSgCommon};

@@ -4,5 +4,5 @@ A base libs for angular 1
 ### Installation
 
 ``` bash
-$ npm install --save @seage/ng-bases
+$ npm install --save ng-bases
 ```

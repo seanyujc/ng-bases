@@ -1,13 +1,30 @@
+import * as angular from "angular";
 import IServiceProvider = angular.IServiceProvider;
+import {Env} from "./enums";
 
-export interface IApiConfigProvider extends IServiceProvider{
-    basePath:any;
-    post:any;
-    get:any;
+
+export interface Site {
+    local: string;
+    remote: string;
+    appID: string;
 }
 
-export interface IServerConfigProvider extends IServiceProvider{
-    DEV:string[];
-    TEST:string[];
-    PRO:string[];
+export interface Host {
+    domain?: string;
+    dir: string;
+}
+
+export declare type Hosts = {[key:string]:Host}
+export declare type Sites = {[key:string]:Site}
+
+export interface IApiConfigProvider extends IServiceProvider {
+    hosts: Hosts;
+    post: any;
+    get: any;
+}
+
+export interface IServerConfigProvider extends IServiceProvider {
+    env: Env;
+    publicPath: string;
+    sites: Sites;
 }

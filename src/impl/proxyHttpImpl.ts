@@ -1,3 +1,4 @@
+import * as angular from "angular";
 import IModule = angular.IModule;
 import {IAddMemberFn} from "../module";
 import {ICommon} from "../common";
