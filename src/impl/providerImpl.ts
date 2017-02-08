@@ -14,6 +14,8 @@ export const provider: IAddMemberFn = function (module: IModule) {
             env: Env.Dev,
             publicPath: '',
             sites: {},
+            wXJsSign: '',
+            wXOAuth: '',
             $get: function () {
                 return _this;
             }

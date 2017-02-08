@@ -1,6 +1,6 @@
 {
   "name": "ng-bases",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "ng common lib",
   "main": "bundles/index.js",
   "scripts": {

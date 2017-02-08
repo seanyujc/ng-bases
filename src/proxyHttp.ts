@@ -1,3 +1,4 @@
+import * as angular from "angular";
 import IHttpPromise = angular.IHttpPromise;
 export interface IProxyHttp{
     get<T>(api:string, params: any):IHttpPromise<T>;

@@ -27,4 +27,6 @@ export interface IServerConfigProvider extends IServiceProvider {
     env: Env;
     publicPath: string;
     sites: Sites;
+    wXJsSign: string;
+    wXOAuth: string;
 }

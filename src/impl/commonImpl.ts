@@ -14,15 +14,18 @@ class CommonFactory implements ICommon {
     private domain: string;
     private localSite: string;
     private entrance: string;
+    private jsSignUrl: string;
 
     constructor(private $q: ng.IQService, private apiConfig: IApiConfigProvider, private serverConfig: IServerConfigProvider) {
-        const URL_TPL='//DOMAIN/credit/app/wechat/auth_base?appId=APPID&path=PATH&state=STATE';
+        const URL_TPL='//{DOMAIN}{HOST_API}?appId=APPID&path=PATH&state=STATE';
 
         this.env = serverConfig.env;
         this.curSite = serverConfig.sites[this.env];
         this.domain = this.curSite.remote;
         this.localSite = '//' + this.curSite.local + serverConfig.publicPath;
-        this.entrance = URL_TPL.replace('DOMAIN', this.curSite.remote).replace('APPID', this.curSite.appID);
+        this.entrance = URL_TPL.replace(/\{DOMAIN}/, this.curSite.remote).replace(/\{HOST_API}/, serverConfig.wXOAuth)
+            .replace('APPID', this.curSite.appID);
+        this.jsSignUrl = '//'+this.curSite.remote + serverConfig.wXJsSign;
     }
 
     trim(s: string): string {
@@ -56,6 +59,10 @@ class CommonFactory implements ICommon {
 
     getEntrance(): string {
         return this.entrance;
+    }
+
+    getJsSignUrl(): string {
+        return this.jsSignUrl;
     }
 
     q(url: string): any {
