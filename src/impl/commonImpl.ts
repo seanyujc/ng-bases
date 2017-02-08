@@ -8,6 +8,7 @@ import {Env} from "../enums";
 
 class CommonFactory implements ICommon {
     static $inject = ["$q", "apiConfig", "serverConfig"];
+
     private env: Env;
     private curSite: Site;
     private domain: string;
@@ -15,11 +16,13 @@ class CommonFactory implements ICommon {
     private entrance: string;
 
     constructor(private $q: ng.IQService, private apiConfig: IApiConfigProvider, private serverConfig: IServerConfigProvider) {
+        const URL_TPL='//DOMAIN/credit/app/wechat/auth_base?appId=APPID&path=PATH&state=STATE';
+
         this.env = serverConfig.env;
         this.curSite = serverConfig.sites[this.env];
         this.domain = this.curSite.remote;
         this.localSite = '//' + this.curSite.local + serverConfig.publicPath;
-        this.entrance = '//' + this.curSite.remote;
+        this.entrance = URL_TPL.replace('DOMAIN', this.curSite.remote).replace('APPID', this.curSite.appID);
     }
 
     trim(s: string): string {
@@ -29,7 +32,7 @@ class CommonFactory implements ICommon {
     dealPath(apiKey = '', method = 'get'): string {
         let _api = '', _url = apiKey;
         method = method.toLocaleLowerCase();
-        if (this.apiConfig[method]) return '';
+        if (!this.apiConfig[method]) return '';
         if (this.apiConfig[method][apiKey]) {
             _api = this.apiConfig[method][apiKey];
             if (_api.indexOf(':') !== -1) {
@@ -39,7 +42,7 @@ class CommonFactory implements ICommon {
                 _p[1] = this.trim(_p[1]);
                 let host: Host = this.apiConfig.hosts[_p[0]];
                 let _domain = host.domain ? host.domain : this.domain;
-                _url = _url.replace(/\{DOMAIN}/, _domain).replace(/\{HOST}/, host.dir).replace(/\{HOST}/, _p[1]);
+                _url = _url.replace(/\{DOMAIN}/, _domain).replace(/\{HOST}/, host.dir).replace(/\{API}/, _p[1]);
             } else {
                 _url = _api;
             }
@@ -47,12 +50,12 @@ class CommonFactory implements ICommon {
         return _url;
     }
 
-    getLocalSite():string{
+    getLocalSite(): string {
         return this.localSite;
     }
 
-    getEntrance(): string{
-
+    getEntrance(): string {
+        return this.entrance;
     }
 
     q(url: string): any {
