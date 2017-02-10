@@ -7,6 +7,7 @@ import {ICommon} from "../common";
 import {Env} from "../enums";
 
 class CommonFactory implements ICommon {
+    
     static $inject = ["$q", "apiConfig", "serverConfig"];
 
     private env: Env;
@@ -85,8 +86,5 @@ class CommonFactory implements ICommon {
 }
 
 export const common: IAddMemberFn = function (module: IModule) {
-
-    module.service('sgCommon', CommonFactory);
-
-    return module;
+     return module.service('sgCommon', CommonFactory);
 };
