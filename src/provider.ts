@@ -25,6 +25,7 @@ export interface IApiConfigProvider extends IServiceProvider {
 
 export interface IServerConfigProvider extends IServiceProvider {
     env: Env;
+    debug: boolean;
     publicPath: string;
     sites: Sites;
     wXJsSign: string;

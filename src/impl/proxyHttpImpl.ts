@@ -20,6 +20,9 @@ class ProxyHttpImpl implements IProxyHttp {
         } else {
             deferred.reject(res.data);
         }
+        if (this.sgCommon.debug) {
+            window.alert(res.config.url+"\n params: \n"+ JSON.stringify(res.config.params))
+        }
         return deferred.promise;
     };
 

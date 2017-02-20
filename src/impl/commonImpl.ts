@@ -11,6 +11,7 @@ class CommonFactory implements ICommon {
     static $inject = ["$q", "apiConfig", "serverConfig"];
 
     private env: Env;
+    public debug: boolean;
     private curSite: Site;
     private domain: string;
     private localSite: string;
@@ -21,6 +22,7 @@ class CommonFactory implements ICommon {
         const URL_TPL='//{DOMAIN}{HOST_API}?appId=APPID&path=PATH&state=STATE';
 
         this.env = serverConfig.env;
+        this.debug = serverConfig.debug;
         this.curSite = serverConfig.sites[this.env];
         this.domain = this.curSite.remote;
         this.localSite = '//' + this.curSite.local + serverConfig.publicPath;
@@ -51,6 +53,7 @@ class CommonFactory implements ICommon {
                 _url = _api;
             }
         }
+        
         return _url;
     }
 

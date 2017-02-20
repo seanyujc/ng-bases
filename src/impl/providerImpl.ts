@@ -12,6 +12,7 @@ export const provider: IAddMemberFn = function (module: IModule) {
     const serverConfigProvider: IServiceProviderFactory = function () {
         const _this: IServerConfigProvider = {
             env: Env.Dev,
+            debug: false,
             publicPath: '',
             sites: {},
             wXJsSign: '',
