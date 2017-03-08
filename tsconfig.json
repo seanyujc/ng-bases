@@ -21,6 +21,7 @@
   "compileOnSave": true,
   "exclude": [
     "node_modules",
-    "bundles"
+    "bundles",
+    "dts"
   ]
 }

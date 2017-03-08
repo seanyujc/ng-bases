@@ -4,6 +4,7 @@ import {IAddMemberFn} from "../module";
 import IServiceProviderFactory = angular.IServiceProviderFactory;
 import IServiceProvider = angular.IServiceProvider;
 import {IApiConfigProvider, IServerConfigProvider, Site, Host} from "../provider";
+import * as ngb from "../provider";
 import {Env} from "../enums";
 
 
