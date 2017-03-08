@@ -1,26 +1,26 @@
 import * as angular from "angular";
-import {IAddMemberFn} from "../module";
-import {IConstBarcodeVres} from '../constants'
+import { IAddMemberFn } from "../module";
+import { IConstBarcodeVres } from '../constants'
 import IModule = angular.IModule;
-import {IApiConfigProvider, IServerConfigProvider, Site, Host} from "../provider";
-import {ICommon} from "../common";
-import {Env} from "../enums";
+import { IApiConfigProvider, IServerConfigProvider, Site, Host } from "../provider";
+import { ICommon } from "../common";
+import { Env } from "../enums";
 
 class CommonFactory implements ICommon {
-    
-    static $inject = ["$q", "apiConfig", "serverConfig"];
+
+    static $inject = ["$q", "$http", "apiConfig", "serverConfig"];
 
     private env: Env;
     public debug: boolean;
     private protocol: string;
-    private curSite: Site;
+    curSite: Site;
     private domain: string;
     private localSite: string;
     private entrance: string;
     private jsSignUrl: string;
 
-    constructor(private $q: ng.IQService, private apiConfig: IApiConfigProvider, private serverConfig: IServerConfigProvider) {
-        const URL_TPL='//{DOMAIN}{HOST_API}?appId=APPID&path=PATH&state=STATE';
+    constructor(private $q: ng.IQService, private $http: ng.IHttpService, private apiConfig: IApiConfigProvider, private serverConfig: IServerConfigProvider) {
+        const URL_TPL = '//{DOMAIN}{HOST_API}?appId=APPID&path=PATH&state=STATE';
 
         this.env = serverConfig.env;
         this.debug = serverConfig.debug;
@@ -30,7 +30,7 @@ class CommonFactory implements ICommon {
         this.localSite = this.protocol + '//' + this.curSite.local + serverConfig.publicPath;
         this.entrance = URL_TPL.replace(/\{DOMAIN}/, this.curSite.remote).replace(/\{HOST_API}/, serverConfig.wXOAuth)
             .replace('APPID', this.curSite.appID);
-        this.jsSignUrl = '//'+this.curSite.remote + serverConfig.wXJsSign;
+        this.jsSignUrl = '//' + this.curSite.remote + serverConfig.wXJsSign;
     }
 
     trim(s: string): string {
@@ -55,7 +55,7 @@ class CommonFactory implements ICommon {
                 _url = _api;
             }
         }
-        
+
         return _url;
     }
 
@@ -91,5 +91,5 @@ class CommonFactory implements ICommon {
 }
 
 export const common: IAddMemberFn = function (module: IModule) {
-     return module.service('sgCommon', CommonFactory);
+    return module.service('sgCommon', CommonFactory);
 };

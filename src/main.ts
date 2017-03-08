@@ -12,9 +12,8 @@ provider(ngSgCommon);
 constants(ngSgCommon);
 proxyHttp(ngSgCommon);
 
+export * from './impl/moduleImpl'
+export * from './enums'
 export * from './provider'
 export * from './proxyHttp'
-export * from './enums'
-export * from './constants'
 export * from './common'
-

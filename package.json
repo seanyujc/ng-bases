@@ -1,6 +1,6 @@
 {
   "name": "ng-bases",
-  "version": "1.0.18",
+  "version": "1.0.20",
   "description": "ng common lib",
   "main": "bundles/main.js",
   "types": "dts/index.d.ts",
