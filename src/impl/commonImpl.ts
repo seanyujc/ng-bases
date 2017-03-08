@@ -12,6 +12,7 @@ class CommonFactory implements ICommon {
 
     private env: Env;
     public debug: boolean;
+    private protocol: string;
     private curSite: Site;
     private domain: string;
     private localSite: string;
@@ -23,9 +24,10 @@ class CommonFactory implements ICommon {
 
         this.env = serverConfig.env;
         this.debug = serverConfig.debug;
+        this.protocol = serverConfig.protocol;
         this.curSite = serverConfig.sites[this.env];
         this.domain = this.curSite.remote;
-        this.localSite = '//' + this.curSite.local + serverConfig.publicPath;
+        this.localSite = this.protocol + '//' + this.curSite.local + serverConfig.publicPath;
         this.entrance = URL_TPL.replace(/\{DOMAIN}/, this.curSite.remote).replace(/\{HOST_API}/, serverConfig.wXOAuth)
             .replace('APPID', this.curSite.appID);
         this.jsSignUrl = '//'+this.curSite.remote + serverConfig.wXJsSign;
