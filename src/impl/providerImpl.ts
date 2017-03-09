@@ -1,11 +1,11 @@
 import * as angular from "angular";
 import IModule = angular.IModule;
-import {IAddMemberFn} from "../module";
+import { IAddMemberFn } from "../module";
 import IServiceProviderFactory = angular.IServiceProviderFactory;
 import IServiceProvider = angular.IServiceProvider;
-import {IApiConfigProvider, IServerConfigProvider, Site, Host} from "../provider";
+import { IApiConfigProvider, IServerConfigProvider, Site, Host } from "../provider";
 import * as ngb from "../provider";
-import {Env} from "../enums";
+import { Env } from "../enums";
 
 
 export const provider: IAddMemberFn = function (module: IModule) {
@@ -19,6 +19,17 @@ export const provider: IAddMemberFn = function (module: IModule) {
             sites: {},
             wXJsSign: '',
             wXOAuth: '',
+            jsApiList: ["checkJsApi",
+                "onMenuShareTimeline",
+                "onMenuShareAppMessage",
+                "onMenuShareQQ",
+                "onMenuShareWeibo",
+                "hideMenuItems",
+                "showMenuItems",
+                "hideAllNonBaseMenuItem",
+                "showAllNonBaseMenuItem",
+                "getLocation",
+                "scanQRCode"],
             $get: function () {
                 return _this;
             }

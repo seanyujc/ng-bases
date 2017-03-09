@@ -18,6 +18,7 @@ class CommonFactory implements ICommon {
     private localSite: string;
     private entrance: string;
     private jsSignUrl: string;
+    public jsApiList: string[];
 
     constructor(private $q: ng.IQService, private $http: ng.IHttpService, private apiConfig: IApiConfigProvider, private serverConfig: IServerConfigProvider) {
         const URL_TPL = '//{DOMAIN}{HOST_API}?appId=APPID&path=PATH&state=STATE';
@@ -31,6 +32,7 @@ class CommonFactory implements ICommon {
         this.entrance = URL_TPL.replace(/\{DOMAIN}/, this.curSite.remote).replace(/\{HOST_API}/, serverConfig.wXOAuth)
             .replace('APPID', this.curSite.appID);
         this.jsSignUrl = '//' + this.curSite.remote + serverConfig.wXJsSign;
+        this.jsApiList = serverConfig.jsApiList;
     }
 
     trim(s: string): string {

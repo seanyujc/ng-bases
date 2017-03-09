@@ -18,10 +18,7 @@
     ],
     "outDir": "./bundles"
   },
-  "files": [
-    "src/wx/index.d.ts"
-  ],
-  "compileOnSave": true,
+ "compileOnSave": true,
   "exclude": [
     "node_modules",
     "bundles",

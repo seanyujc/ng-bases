@@ -13,7 +13,7 @@ class ProxyHttpImpl implements IProxyHttp {
     constructor(private $q: ng.IQService, private $http: ng.IHttpService, private sgCommon: ICommon) {
     }
 
-    private tf = <T>(res: IHttpPromiseCallbackArg<ISgResult<T>>):any => {
+    private tf = <T>(res: IHttpPromiseCallbackArg<ISgResult<T>>): angular.IPromise<any> => {
         return this.$q<T>((resolve, reject) => {
             if (res.data.code === 0 || res.data.code.toString() === "0") {
                 resolve(res.data.data);
@@ -24,10 +24,9 @@ class ProxyHttpImpl implements IProxyHttp {
                 window.alert(res.config.url + "\n params: \n" + JSON.stringify(res.config.params))
             }
         });
-
     };
 
-    get<T>(api: string, params: any): any {
+    get<T>(api: string, params: any): angular.IPromise<any> {
         const _path = this.sgCommon.dealPath(api, 'get');
         return this.$http.get<ISgResult<T>>(_path, {
             params,

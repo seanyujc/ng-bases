@@ -31,4 +31,5 @@ export interface IServerConfigProvider extends IServiceProvider {
     sites: Sites;
     wXJsSign: string;
     wXOAuth: string;
+    jsApiList: string[];
 }

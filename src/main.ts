@@ -6,11 +6,13 @@ import { common } from './impl/commonImpl';
 import { provider } from "./impl/providerImpl";
 import { constants } from "./impl/constantsImpl";
 import { proxyHttp } from "./impl/proxyHttpImpl";
+import { wechat } from './impl/wechatImpl';
 
 common(ngSgCommon);
 provider(ngSgCommon);
 constants(ngSgCommon);
 proxyHttp(ngSgCommon);
+wechat(ngSgCommon);
 
 export * from './impl/moduleImpl'
 export * from './enums'
