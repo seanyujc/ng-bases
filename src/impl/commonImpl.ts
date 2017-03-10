@@ -73,16 +73,10 @@ class CommonFactory implements ICommon {
         return this.jsSignUrl;
     }
 
-    q(url: string): any {
-        var _search = "", q = {}, _q;
-        if (url === undefined) {
-            _search = window.location.search;
-        } else {
-            _search = url;
-        }
-
-        if (_search.split('?')[1]) {
-            _q = _search.split('?')[1].split('&');
+    q(search = window.location.search): any {
+        var q = {}, _q;
+        if (search.split('?')[1]) {
+            _q = search.split('?')[1].split('&');
             for (var i = 0, l = _q.length; i < l; i++) {
                 const _t = _q[i].split('=');
                 q[_t[0]] = _t[1];

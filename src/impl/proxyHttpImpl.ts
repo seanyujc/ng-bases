@@ -34,14 +34,14 @@ class ProxyHttpImpl implements IProxyHttp {
         }).then(this.tf);
     }
 
-    post<T>(api: string, params: any): any{
+    post<T>(api: string, params: any): angular.IPromise<any>{
         const _path = this.sgCommon.dealPath(api, 'get');
         return this.$http.post<ISgResult<T>>(_path, params, {
             cache: false
         }).then(this.tf);
     }
 
-    form<T>(api: string, form: FormData): any {
+    form<T>(api: string, form: FormData): angular.IPromise<any> {
         const _path = this.sgCommon.dealPath(api, 'post');
         return this.$http.post(_path, form, {
             cache: false,
