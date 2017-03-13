@@ -6,15 +6,13 @@ import { IAddMemberFn } from "../module";
 import { IModule } from "@types/angular";
 
 class wechatFactory implements IWechat {
-    static $inject = ["$q", "proxyHttp", "sgCommon"];
-    constructor(private $q: ng.IQService, private proxyHttp: IProxyHttp, private common: ICommon) {
-        if(this.isWechat()){
-            this.wCJSSignature();
-        }
+    share() {
+        throw new Error('Method not implemented.');
     }
-    isWechat(): boolean{
+
+    isWechat(): boolean {
         var ua = navigator.userAgent.toLowerCase();
-        return ua.search(/MicroMessenger/i)!==-1
+        return ua.search(/MicroMessenger/i) !== -1
     }
     wCJSSignature<T>(): angular.IPromise<any> {
         const signUrl = this.common.getJsSignUrl()
@@ -28,6 +26,12 @@ class wechatFactory implements IWechat {
                 wx.config(data);
             })
         })
+    }
+    static $inject = ["$q", "proxyHttp", "sgCommon"];
+    constructor(private $q: ng.IQService, private proxyHttp: IProxyHttp, private common: ICommon) {
+        if (this.isWechat()) {
+            this.wCJSSignature();
+        }
     }
 
 }
