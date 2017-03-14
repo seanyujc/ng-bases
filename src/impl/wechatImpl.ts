@@ -1,13 +1,19 @@
 /// <reference path="../../dts/wx/index.d.ts" />
 import { proxyHttp } from './proxyHttpImpl';
-import { IWechat, ICommon } from "../common";
+import { IWechat, ICommon, wechatShareParam } from "../common";
 import { IProxyHttp } from "../proxyHttp";
 import { IAddMemberFn } from "../module";
 import { IModule } from "@types/angular";
 
+
+
 class wechatFactory implements IWechat {
-    share() {
-        throw new Error('Method not implemented.');
+    shareJoint(param: wechatShareParam) {
+        wx.onMenuShareAppMessage(param)
+        wx.onMenuShareQQ(param)
+        wx.onMenuShareQZone(param)
+        wx.onMenuShareTimeline(param)
+        wx.onMenuShareWeibo(param)
     }
 
     isWechat(): boolean {

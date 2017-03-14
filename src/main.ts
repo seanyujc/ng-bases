@@ -1,18 +1,18 @@
 /**
  * Created by sean on 2017/2/3.
  */
-import { ngSgCommon } from './impl/moduleImpl';
+import { sgNgBases } from './impl/moduleImpl';
 import { common } from './impl/commonImpl';
 import { provider } from "./impl/providerImpl";
 import { constants } from "./impl/constantsImpl";
 import { proxyHttp } from "./impl/proxyHttpImpl";
 import { wechat } from './impl/wechatImpl';
 
-common(ngSgCommon);
-provider(ngSgCommon);
-constants(ngSgCommon);
-proxyHttp(ngSgCommon);
-wechat(ngSgCommon);
+common(sgNgBases);
+provider(sgNgBases);
+constants(sgNgBases);
+proxyHttp(sgNgBases);
+wechat(sgNgBases);
 
 export * from './impl/moduleImpl'
 export * from './enums'

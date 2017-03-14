@@ -10,15 +10,15 @@ declare namespace wx {
     function checkJsApi(para);
     /*分享接口*/
     // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
-    function onMenuShareTimeline(para: OnMenuShareTimelinePara);
+    function onMenuShareTimeline(para: MenuShareTimelinePara);
     // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
-    function onMenuShareAppMessage(para: OnMenuShareAppMessagePara);
+    function onMenuShareAppMessage(para: MenuShareAppMessagePara);
     // 获取“分享到QQ”按钮点击状态及自定义分享内容接口
-    function onMenuShareQQ(para: OnMenuShareQQPara);
+    function onMenuShareQQ(para: MenuShareQQPara);
     // 获取“分享到腾讯微博”按钮点击状态及自定义分享内容接口
-    function onMenuShareWeibo(para: OnMenuShareWeiboPara);
+    function onMenuShareWeibo(para: MenuShareWeiboPara);
     // 获取“分享到QQ空间”按钮点击状态及自定义分享内容接口
-    function onMenuShareQZone(para: OnMenuShareQZonePara);
+    function onMenuShareQZone(para: MenuShareQZonePara);
     /*图像接口*/
     // 拍照或从手机相册中选图接口
     function chooseImage(para: ChooseImagePara);
@@ -59,11 +59,11 @@ declare namespace wx {
     }
 
     interface CommonPara {
-        success(res: Result): any;
-        fail(res: Result): any;
-        complete(res: Result): any;
-        cancel(res: Result): any;
-        trigger(res: Result): any;
+        success?(res: Result): any;
+        fail?(res: Result): any;
+        complete?(res: Result): any;
+        cancel?(res: Result): any;
+        trigger?(res: Result): any;
     }
 
     interface ConfigPara {
@@ -90,7 +90,7 @@ declare namespace wx {
         checkResult: Object;
     }
 
-    interface OnMenuShareTimelinePara extends CommonPara {
+    interface MenuShareTimelinePara extends CommonPara {
         // 分享标题
         title: string;
         // 分享链接
@@ -99,23 +99,25 @@ declare namespace wx {
         imgUrl: string;
     }
 
-    interface OnMenuShareAppMessagePara extends OnMenuShareTimelinePara {
+    interface MenuShareAppMessagePara extends MenuShareTimelinePara {
         // 分享描述
         desc: string;
+        //分享类型,music、video或link，不填默认为link
+        type?: string;
         // 如果type是music或video，则要提供数据链接，默认为空
-        dataUrl: string;
+        dataUrl?: string;
     }
 
-    interface OnMenuShareQQPara extends OnMenuShareTimelinePara {
+    interface MenuShareQQPara extends MenuShareTimelinePara {
         // 分享描述
         desc: string;
     }
 
-    interface OnMenuShareWeiboPara extends OnMenuShareQQPara {
+    interface MenuShareWeiboPara extends MenuShareQQPara {
 
     }
 
-    interface OnMenuShareQZonePara extends OnMenuShareQQPara {
+    interface MenuShareQZonePara extends MenuShareQQPara {
 
     }
 
@@ -218,18 +220,18 @@ declare namespace wx {
         // 当needResult 为 1 时，扫码返回的结果
         resultStr: string
     }
-    interface ChooseWXPayPara{
+    interface ChooseWXPayPara {
         // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-        timestamp:number;
+        timestamp: number;
         // 支付签名随机串，不长于 32 位
-        nonceStr:string;
+        nonceStr: string;
         // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-        package:string;
+        package: string;
         // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
         signType: string;
         // 支付签名
         paySign: string;
         // 支付成功后的回调函数
-        success(res):any;
+        success(res): any;
     }
 }

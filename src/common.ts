@@ -10,8 +10,12 @@ export interface ICommon {
     getJsSignUrl(): string;
     getEntrance(): string;
 }
+export interface wechatShareParam extends wx.MenuShareAppMessagePara, wx.MenuShareQQPara,
+    wx.MenuShareQZonePara, wx.MenuShareTimelinePara, wx.MenuShareWeiboPara {
+
+}
 export interface IWechat {
     wCJSSignature<T>(): angular.IPromise<any>;
     isWechat(): boolean;
-    share();
+    shareJoint(param: wechatShareParam);
 }
