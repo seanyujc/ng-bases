@@ -9,6 +9,7 @@ export interface ICommon {
     q(url?: string): any;
     getJsSignUrl(): string;
     getEntrance(): string;
+    getLocalSite(): string;
 }
 export interface wechatShareParam extends wx.MenuShareAppMessagePara, wx.MenuShareQQPara,
     wx.MenuShareQZonePara, wx.MenuShareTimelinePara, wx.MenuShareWeiboPara {

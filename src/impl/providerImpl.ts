@@ -14,7 +14,7 @@ export const provider: IAddMemberFn = function (module: IModule) {
         const _this: IServerConfigProvider = {
             env: Env.DEV,
             debug: false,
-            protocol: 'http:',
+            protocol: window.location.protocol,
             publicPath: '',
             sites: {},
             wXJsSign: '',
