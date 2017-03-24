@@ -7,7 +7,11 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "declaration": true,
-    "lib": ["es6", "es2015","dom"],
+    "lib": [
+      "es6",
+      "es2015",
+      "dom"
+    ],
     "typeRoots": [
       "node_modules/@types/"
     ],
@@ -18,7 +22,7 @@
     ],
     "outDir": "./bundles"
   },
- "compileOnSave": true,
+  "compileOnSave": true,
   "exclude": [
     "node_modules",
     "bundles",

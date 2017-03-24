@@ -1,7 +1,4 @@
-import * as angular from "angular";
-import IServiceProvider = angular.IServiceProvider;
 import {Env} from "./enums";
-
 
 export interface Site {
     local: string;
@@ -17,13 +14,13 @@ export interface Host {
 export declare type Hosts = {[key:string]:Host}
 export declare type Sites = {[key:string]:Site}
 
-export interface IApiConfigProvider extends IServiceProvider {
+export interface IApiConfigProvider extends ng.IServiceProvider {
     hosts: Hosts;
     post: any;
     get: any;
 }
 
-export interface IServerConfigProvider extends IServiceProvider {
+export interface IServerConfigProvider extends ng.IServiceProvider {
     env: Env;
     debug: boolean;
     protocol: string;

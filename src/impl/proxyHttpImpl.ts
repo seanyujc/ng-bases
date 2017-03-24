@@ -1,10 +1,8 @@
 import * as angular from "angular";
-import IModule = angular.IModule;
 import { IAddMemberFn } from "../module";
 import { ICommon } from "../common";
-import IHttpPromise = angular.IHttpPromise;
-import IHttpPromiseCallbackArg = angular.IHttpPromiseCallbackArg;
 import { ISgResult, IProxyHttp } from "../proxyHttp";
+import * as ng from '@types/angular';
 
 class ProxyHttpImpl implements IProxyHttp {
 
@@ -13,7 +11,7 @@ class ProxyHttpImpl implements IProxyHttp {
     constructor(private $q: ng.IQService, private $http: ng.IHttpService, private sgCommon: ICommon) {
     }
 
-    private tf = <T>(res: IHttpPromiseCallbackArg<ISgResult<T>>): angular.IPromise<any> => {
+    private tf = <T>(res: ng.IHttpPromiseCallbackArg<ISgResult<T>>): angular.IPromise<any> => {
         return this.$q<T>((resolve, reject) => {
             if (res.data.code === 0 || res.data.code.toString() === "0") {
                 resolve(res.data.data);
@@ -51,6 +49,6 @@ class ProxyHttpImpl implements IProxyHttp {
     }
 }
 
-export const proxyHttp: IAddMemberFn = function (module: IModule) {
+export const proxyHttp: IAddMemberFn = function (module: ng.IModule) {
     return module.service('proxyHttp', ProxyHttpImpl);
 };

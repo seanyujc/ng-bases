@@ -1,5 +1,3 @@
-
-import { IConstBarcodeVres } from "./constants";
 import { Site } from "./provider";
 export interface ICommon {
     curSite: Site;

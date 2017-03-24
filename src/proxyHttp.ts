@@ -1,9 +1,7 @@
-import * as angular from "angular";
-import IHttpPromise = angular.IHttpPromise;
 export interface IProxyHttp{
-    get<T>(api:string, params: any):IHttpPromise<any>;
-    post<T>(api: string, params: any): IHttpPromise<any>;
-    form<T>(api: string, form: any): IHttpPromise<any>;
+    get<T>(api:string, params: any): ng.IHttpPromise<any>;
+    post<T>(api: string, params: any): ng.IHttpPromise<any>;
+    form<T>(api: string, form: any): ng.IHttpPromise<any>;
 }
 
 export interface ISgResult<T>{
