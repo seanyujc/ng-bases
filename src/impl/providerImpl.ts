@@ -1,19 +1,18 @@
-import {IAddMemberFn} from "../module";
+import { Env } from "../enums";
+import { IAddMemberFn } from "../module";
 import * as prov from "../provider";
-import {Env} from "../enums";
 
+export const provider: IAddMemberFn = (module: ng.IModule) => {
 
-export const provider: IAddMemberFn = function (module: ng.IModule) {
-
-  const serverConfigProvider: ng.IServiceProviderFactory = function () {
-    const _this: prov.IServerConfigProvider = {
+  const serverConfigProvider: ng.IServiceProviderFactory = () => {
+    const self: prov.IServerConfigProvider = {
       env: Env.DEV,
       debug: false,
       protocol: window.location.protocol,
-      publicPath: '',
+      publicPath: "",
       sites: {},
-      wXJsSign: '',
-      wXOAuth: '',
+      wXJsSign: "",
+      wXOAuth: "",
       jsApiList: ["checkJsApi",
         "onMenuShareTimeline",
         "onMenuShareAppMessage",
@@ -25,27 +24,26 @@ export const provider: IAddMemberFn = function (module: ng.IModule) {
         "showAllNonBaseMenuItem",
         "getLocation",
         "scanQRCode"],
-      $get: function () {
-        return _this;
-      }
+      $get() {
+        return self;
+      },
     };
-    return _this
+    return self;
   };
 
-  const apiConfigProvider: ng.IServiceProviderFactory = function () {
-    const _this: prov.IApiConfigProvider = {
+  const apiConfigProvider: ng.IServiceProviderFactory = () => {
+    const self: prov.IApiConfigProvider = {
       hosts: {},
       post: {},
       get: {},
-      $get: function () {
-        return _this;
-      }
+      $get() {
+        return self;
+      },
     };
-    return _this
+    return self;
   };
 
-  module.provider('apiConfig', apiConfigProvider).provider('serverConfig', serverConfigProvider);
+  module.provider("apiConfig", apiConfigProvider).provider("serverConfig", serverConfigProvider);
 
   return module;
 };
-

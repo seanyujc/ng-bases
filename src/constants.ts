@@ -1,4 +1,4 @@
-export interface IConstBarcodeVres{
+export interface IConstBarcodeVres {
     NOIS;
     ABROAD;
     VALIERR;

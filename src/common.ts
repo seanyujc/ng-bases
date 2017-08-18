@@ -1,6 +1,8 @@
-import { Site } from "./provider";
+// tslint:disable-next-line:no-reference
+/// <reference path="../dts/wx/index.d.ts" />
+import { ISite } from "./provider";
 export interface ICommon {
-    curSite: Site;
+    curSite: ISite;
     debug: boolean;
     jsApiList: string[];
     dealPath(apiKey: string, method: string): string;
@@ -9,12 +11,11 @@ export interface ICommon {
     getEntrance(): string;
     getLocalSite(): string;
 }
-export interface wechatShareParam extends wx.MenuShareAppMessagePara, wx.MenuShareQQPara,
+export interface IWechatShareParam extends wx.MenuShareAppMessagePara, wx.MenuShareQQPara,
     wx.MenuShareQZonePara, wx.MenuShareTimelinePara, wx.MenuShareWeiboPara {
-
 }
 export interface IWechat {
     wCJSSignature<T>(): angular.IPromise<any>;
     isWechat(): boolean;
-    shareJoint(param: wechatShareParam);
+    shareJoint(param: IWechatShareParam);
 }

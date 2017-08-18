@@ -1,8 +1,7 @@
 import * as angular from "angular";
-import { IAddMemberFn } from "../module";
 import { ICommon } from "../common";
-import { ISgResult, IProxyHttp } from "../proxyHttp";
-import * as ng from '@types/angular';
+import { IAddMemberFn } from "../module";
+import { IProxyHttp, ISgResult } from "../proxyHttp";
 
 class ProxyHttpImpl implements IProxyHttp {
 
@@ -11,7 +10,30 @@ class ProxyHttpImpl implements IProxyHttp {
   constructor(private $q: ng.IQService, private $http: ng.IHttpService, private sgCommon: ICommon) {
   }
 
-  private tf = <T>(res: ng.IHttpPromiseCallbackArg<ISgResult<T>>): angular.IPromise<T | any> => {
+  get<T>(api: string, params: any): ng.IPromise<T | any> {
+    const PATH = this.sgCommon.dealPath(api, "get");
+    return this.$http.get<ISgResult<T>>(PATH, {
+      params,
+      cache: false,
+    }).then(this.tf);
+  }
+
+  post<T>(api: string, params: any): ng.IPromise<T | any> {
+    const PATH = this.sgCommon.dealPath(api, "post");
+    return this.$http.post<ISgResult<T>>(PATH, params, {
+      cache: false,
+    }).then(this.tf);
+  }
+
+  form<T>(api: string, form: FormData): ng.IPromise<T | any> {
+    const PATH = this.sgCommon.dealPath(api, "post");
+    return this.$http.post(PATH, form, {
+      cache: false,
+      headers: { "Content-Type": undefined },
+      transformRequest: angular.identity,
+    }).then(this.tf);
+  }
+  private tf<T>(res: ng.IHttpPromiseCallbackArg<ISgResult<T>>): ng.IPromise<T | any> {
     return this.$q<T>((resolve, reject) => {
       if (res.data.code === 0 || res.data.code.toString() === "0") {
         resolve(res.data.data);
@@ -19,36 +41,12 @@ class ProxyHttpImpl implements IProxyHttp {
         reject(res.data);
       }
       if (this.sgCommon.debug) {
-        window.alert(res.config.url + "\n params: \n" + JSON.stringify(res.config.params))
+        window.alert(res.config.url + "\n params: \n" + JSON.stringify(res.config.params));
       }
     });
-  };
-
-  get<T>(api: string, params: any): angular.IPromise<T | any> {
-    const _path = this.sgCommon.dealPath(api, 'get');
-    return this.$http.get<ISgResult<T>>(_path, {
-      params,
-      cache: false
-    }).then(this.tf);
-  }
-
-  post<T>(api: string, params: any): angular.IPromise<T | any> {
-    const _path = this.sgCommon.dealPath(api, 'post');
-    return this.$http.post<ISgResult<T>>(_path, params, {
-      cache: false
-    }).then(this.tf);
-  }
-
-  form<T>(api: string, form: FormData): angular.IPromise<T | any> {
-    const _path = this.sgCommon.dealPath(api, 'post');
-    return this.$http.post(_path, form, {
-      cache: false,
-      headers: { "Content-Type": undefined },
-      transformRequest: angular.identity
-    }).then(this.tf);
   }
 }
 
-export const proxyHttp: IAddMemberFn = function (module: ng.IModule) {
-  return module.service('proxyHttp', ProxyHttpImpl);
+export const proxyHttp: IAddMemberFn = (module: ng.IModule) => {
+  return module.service("proxyHttp", ProxyHttpImpl);
 };

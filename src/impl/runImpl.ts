@@ -1,10 +1,9 @@
-import {IAddMemberFn} from "../module";
-import * as ng from '@types/angular';
+import { IAddMemberFn } from "../module";
 
 /**
  * Created by seany on 2017/2/8.
  */
-export const run: IAddMemberFn = function (module: ng.IModule) {
+export const run: IAddMemberFn = (module: ng.IModule) => {
 
   return module;
 };

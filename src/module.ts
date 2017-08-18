@@ -1,7 +1,2 @@
 
-export interface IAddMemberFn {
-    (module: ng.IModule): ng.IModule;
-}
-
-
-
+export type IAddMemberFn = (module: ng.IModule) => ng.IModule;

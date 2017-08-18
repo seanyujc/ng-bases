@@ -1,21 +1,21 @@
-import {Env} from "./enums";
+import { Env } from "./enums";
 
-export interface Site {
+export interface ISite {
     local: string;
     remote: string;
     appID: string;
 }
 
-export interface Host {
+export interface IHost {
     domain?: string;
     dir: string;
 }
 
-export declare type Hosts = {[key:string]:Host}
-export declare type Sites = {[key:string]:Site}
+export declare interface IHosts { [key: string]: IHost; }
+export declare interface ISites { [key: string]: ISite; }
 
 export interface IApiConfigProvider extends ng.IServiceProvider {
-    hosts: Hosts;
+    hosts: IHosts;
     post: any;
     get: any;
 }
@@ -25,8 +25,13 @@ export interface IServerConfigProvider extends ng.IServiceProvider {
     debug: boolean;
     protocol: string;
     publicPath: string;
-    sites: Sites;
+    sites: ISites;
     wXJsSign: string;
     wXOAuth: string;
     jsApiList: string[];
+}
+
+export interface IMockConfigProvider extends ng.IServiceProvider {
+    post: any;
+    get: any;
 }

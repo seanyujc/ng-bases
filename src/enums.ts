@@ -1,5 +1,5 @@
-export const enum Env{
-    DEV=1,
+export const enum Env {
+    DEV = 1,
     TEST,
-    PRO
+    PRO,
 }
